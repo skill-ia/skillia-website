@@ -1,0 +1,91 @@
+%!Adobe-FontList 1.24
+%Locale:0x409
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Invalid
+OutlineFileName:/Users/albaaparicioneriz/Desktop/SKILLIA/Carpeta Modelo_Documento_Presentación_SKILLIA/Document fonts/AdobeFnt24.lst
+FileLength:1832
+FileModTime:772722593
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:TrueType
+FontName:Bitum-Bold
+FamilyName:Bitum
+StyleName:Bold
+MenuName:Bitum
+StyleBits:2
+WeightClass:700
+WidthClass:5
+AngleClass:0
+FullName:Bitum-Bold
+WritingScript:Roman
+OutlineFileName:/Users/albaaparicioneriz/Desktop/SKILLIA/Carpeta Modelo_Documento_Presentación_SKILLIA/Document fonts/Bitum-Bold.ttf
+DataFormat:sfntData
+hasSVG:no
+hasSBIX:no
+hasCOLR:no
+VariableFontType:NonVariableFont
+FileLength:73684
+FileModTime:615035044
+NameArray:0,Mac,18,Bitum Bold
+NameArray:0,Mac,4,Bitum-Bold
+NameArray:0,Win,1,Bitum
+NameArray:0,Win,16,Bitum
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Type1
+FontName:MinionPro-Regular
+FamilyName:Minion Pro
+StyleName:Regular
+MenuName:Minion Pro
+StyleBits:0
+WeightClass:400
+WidthClass:5
+AngleClass:0
+FullName:Minion Pro
+WritingScript:Roman
+OutlineFileName:/Users/albaaparicioneriz/Desktop/SKILLIA/Carpeta Modelo_Documento_Presentación_SKILLIA/Document fonts/MinionPro-Regular.otf
+DataFormat:sfntData
+UsesStandardEncoding:yes
+isCFF:yes
+hasSVG:no
+hasSBIX:no
+hasCOLR:no
+VariableFontType:NonVariableFont
+FileLength:218640
+FileModTime:727378145
+DesignSize:110
+NameArray:0,Mac,4,Minion Pro
+NameArray:0,Win,1,Minion Pro
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:TrueType
+FontName:NotoSans-Regular
+FamilyName:Noto Sans
+StyleName:Regular
+MenuName:Noto Sans
+FamilyPrefix:NotoSans
+StyleBits:0
+WeightClass:400
+WidthClass:5
+AngleClass:0
+FullName:Noto Sans Regular
+WritingScript:Roman
+OutlineFileName:/Users/albaaparicioneriz/Desktop/SKILLIA/Carpeta Modelo_Documento_Presentación_SKILLIA/Document fonts/NotoSans-VariableFont_wdth,wght.ttf
+DataFormat:sfntData
+hasSVG:no
+hasSBIX:no
+hasCOLR:no
+VariableFontType:TrueTypeVariableFont
+FileLength:2044548
+FileModTime:763356138
+NameArray:0,Win,1,Noto Sans
+%EndFont
+

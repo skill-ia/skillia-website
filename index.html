@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/src/assets/Logo SVG.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Skillia</title>
+    <link rel="icon" type="image/svg+xml" href="/SKILLIA_RECURSOS/LOGOTIP_ISOTIP/ISOTIP/SVG/ISOTIP FONS BLANC.svg" media="(prefers-color-scheme: light)" />
+    <link rel="icon" type="image/svg+xml" href="/SKILLIA_RECURSOS/LOGOTIP_ISOTIP/ISOTIP/SVG/ISOTIP FONS NEGRE.svg" media="(prefers-color-scheme: dark)" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <meta name="description" content="Ahorra tiempo, esfuerzo y dinero en aprender lo que necesitas para empezar a vivir del trading. Más de 1125 traders formados." />
+
+    <!-- Performance optimizations -->
+    <link rel="preconnect" href="https://gaxpfacb72mkzk4v.public.blob.vercel-storage.com" />
+    <link rel="dns-prefetch" href="//cal.com" />
+    <link rel="dns-prefetch" href="//vercel.live" />
+
+    <!-- Preload critical fonts -->
+    <link rel="preload" href="/fonts/geist-sans.woff2" as="font" type="font/woff2" crossorigin />
+
+    <!-- Critical CSS for above-the-fold content -->
+    <style>
+      /* Inline critical CSS for hero section */
+      body {
+        margin: 0;
+        background-color: #f0f0e2;
+        color: #272727;
+        font-family: system-ui, -apple-system, sans-serif;
+      }
+      #root { min-height: 100vh; }
+      .hero-container {
+        min-height: 100vh;
+        background: #f0f0e2;
+      }
+      /* Loading state */
+      .loading-spinner {
+        border: 2px solid #0181c9;
+        border-top: 2px solid transparent;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root">
+      <!-- Loading fallback -->
+      <div style="display: flex; align-items: center; justify-content: center; min-height: 100vh; background: #f0f0e2;">
+        <div style="text-align: center;">
+          <div class="loading-spinner" style="width: 40px; height: 40px; margin: 0 auto 16px;"></div>
+          <p style="color: #272727; margin: 0; font-size: 14px;">Cargando...</p>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
