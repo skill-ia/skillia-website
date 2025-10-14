@@ -29,3 +29,4 @@ dist-ssr
 *testimonials*
 VSL2.mp4
 *.md
+.env

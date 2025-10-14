@@ -67,9 +67,9 @@ export const Navbar01 = React.forwardRef<HTMLElement, Navbar01Props>(
       logo = <img src={Logo} className="w-10 h-10" alt="Skillia" />,
       navigationLinks = defaultNavigationLinks,
       signInText = "Iniciar Sesión",
-      signInHref = "http://localhost:5174",
+      signInHref = "http://localhost:5173",
       ctaText = "Regístrate",
-      ctaHref = "http://localhost:5174/auth/signup",
+      ctaHref = "http://localhost:5173/auth/signup",
       onSignInClick,
       onCtaClick,
       ...props

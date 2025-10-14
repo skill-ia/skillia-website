@@ -2,6 +2,7 @@ import { Percent, Wallet, Trophy } from "lucide-react";
 import { Card, Carousel } from "@/components/ui/shadcn-io/apple-cards-carousel";
 import { motion } from "framer-motion";
 import { GridPattern } from "@/components/ui/shadcn-io/grid-pattern";
+import { getVideoUrl } from "@/config/videos.config";
 
 //import Marquee1 from "@/assets/results-screenshots/1.png";
 //import Marquee2 from "@/assets/results-screenshots/2.jpg";
@@ -42,38 +43,35 @@ import { ImageZoom } from "@/components/ui/shadcn-io/image-zoom";
     src: ChristianImg || "",
     title: "Christian",
     content: "Operaciones Superiores al 11% Diario",
-    video:
-      "https://gaxpfacb72mkzk4v.public.blob.vercel-storage.com/Christian.mp4",
+    video: getVideoUrl('TESTIMONIAL_CHRISTIAN'),
   },
   {
     id: 2,
     src: LeonardoImg || "",
     title: "Leonardo",
     content: "Operaciones de Hasta 7x",
-    video:
-      "https://gaxpfacb72mkzk4v.public.blob.vercel-storage.com/Leonardo.mp4",
+    video: getVideoUrl('TESTIMONIAL_LEONARDO'),
   },
   {
     id: 3,
     src: MillerImg || "",
     title: "Miller",
     content: "Triplicó su Cuenta en 3 Meses",
-    video: "https://gaxpfacb72mkzk4v.public.blob.vercel-storage.com/Miller.mp4",
+    video: getVideoUrl('TESTIMONIAL_MILLER'),
   },
   {
     id: 4,
     src: SantiagoImg || "",
     title: "Santiago",
     content: "Rentabilidad del 50% en 3 Meses",
-    video:
-      "https://gaxpfacb72mkzk4v.public.blob.vercel-storage.com/Santiago.mp4",
+    video: getVideoUrl('TESTIMONIAL_SANTIAGO'),
   },
   {
     id: 5,
     src: EthsonImg || "",
     title: "Ethson",
     content: "Dejó su Oficio en la Banca para Vivir del Trading",
-    video: "https://gaxpfacb72mkzk4v.public.blob.vercel-storage.com/Ethson.mp4",
+    video: getVideoUrl('TESTIMONIAL_ETHSON'),
   },
 ];
 

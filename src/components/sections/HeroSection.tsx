@@ -4,8 +4,9 @@ import { ArrowDown, Play } from "lucide-react";
 import { FcGoogle } from "react-icons/fc";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import { useRef, useState, useEffect, useCallback } from "react";
+import { useRef, useState } from "react";
 import { trackVideoPlay } from "@/utils/analytics";
+import { getVideoUrl, getVideoMetadata } from "@/config/videos.config";
 
 // Import testimonial images
 //import ChristianImg from "@/assets/testimonials/Christian.png";
@@ -83,15 +84,17 @@ export function HeroSection({
 
       console.log(`[VIDEO-DEBUG] Play clicked - isFirstPlay: ${isFirstPlay}`);
 
+      // Get video metadata from centralized config
+      const videoMetadata = getVideoMetadata('HERO_DEMO');
+      const videoUrl = getVideoUrl('HERO_DEMO');
+
       // Track video play event only on initial play
       if (isFirstPlay) {
         try {
           await trackVideoPlay({
-            videoId: "hero-vsl",
-            videoTitle:
-              "Ahorra tiempo, esfuerzo y dinero en aprender lo que necesitas para empezar a vivir del trading",
-            videoUrl:
-              "https://ddteqo0tepmgptob.public.blob.vercel-storage.com/Skillia%20Demo.mp4",
+            videoId: videoMetadata?.id || "hero-vsl",
+            videoTitle: videoMetadata?.title || "Skillia Demo Video",
+            videoUrl: videoUrl,
           });
           console.log(`[VIDEO-DEBUG] Analytics tracked`);
         } catch (analyticsError) {
@@ -112,45 +115,6 @@ export function HeroSection({
       }
     } catch (error) {
       console.warn("Failed to play video or track:", error);
-    }
-  };
-
-  // Smooth scrolling navigation handler (same as navbar)
-  const handleNavClick = async (href: string) => {
-    // Extract the target ID from href (remove the #)
-    const targetId = href.replace("#", "");
-    const targetElement = document.getElementById(targetId);
-
-    if (targetElement) {
-      // Calculate offset for fixed navbar (64px)
-      const navbarHeight = 64;
-      const targetPosition = targetElement.offsetTop - navbarHeight;
-
-      // Custom smooth scrolling with adjustable speed
-      const startPosition = window.pageYOffset;
-      const distance = targetPosition - startPosition;
-      const duration = 500; // Adjust this value to control speed (ms)
-      let startTime: number | null = null;
-
-      function animation(currentTime: number) {
-        if (startTime === null) startTime = currentTime;
-        const timeElapsed = currentTime - startTime;
-        const progress = Math.min(timeElapsed / duration, 1);
-
-        // Easing function for smooth animation (ease-in-out)
-        const ease =
-          progress < 0.5
-            ? 2 * progress * progress
-            : 1 - Math.pow(-2 * progress + 2, 2) / 2;
-
-        window.scrollTo(0, startPosition + distance * ease);
-
-        if (timeElapsed < duration) {
-          requestAnimationFrame(animation);
-        }
-      }
-
-      requestAnimationFrame(animation);
     }
   };
 
@@ -243,7 +207,7 @@ export function HeroSection({
                           variant="secondary-hero-button"
                           onClick={() =>
                             (window.location.href =
-                              "http://localhost:5174?autoSignIn=google")
+                              "http://localhost:5173?autoSignIn=google")
                           }>
                           <FcGoogle className="w-5 h-auto" />
                           Empieza Gratis con Google
@@ -416,7 +380,7 @@ export function HeroSection({
                 preload="auto"
                 poster={VSLThumbnail}
                 slot="media"
-                src="https://ddteqo0tepmgptob.public.blob.vercel-storage.com/Skillia%20Demo.mp4"
+                src={getVideoUrl('HERO_DEMO')}
                 className="w-full h-full object-cover"
               />
               <VideoPlayerControlBar

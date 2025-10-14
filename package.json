@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.908.0",
+    "@aws-sdk/s3-request-presigner": "^3.908.0",
     "@calcom/atoms": "^1.6.0-booker",
     "@calcom/embed-react": "^1.5.3",
     "@radix-ui/react-navigation-menu": "^1.2.14",
