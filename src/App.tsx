@@ -11,6 +11,8 @@ import { PersonalLayout } from '@/routes/personal/PersonalLayout';
 import { EntitiesLayout } from '@/routes/entities/EntitiesLayout';
 import { personalNavLinks } from '@/config/personal-sections.config';
 import { entitiesNavLinks } from '@/config/entities-sections.config';
+import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 
 function App() {
   const location = useLocation();
@@ -22,6 +24,8 @@ function App() {
   return (
     <>
       <Navbar01 navigationLinks={navigationLinks} />
+      <Analytics />
+      <SpeedInsights />
       <Routes>
         {/* Root redirect to personal */}
         <Route path="/" element={<Navigate to="/personal/" replace />} />

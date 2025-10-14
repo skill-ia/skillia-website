@@ -1,8 +1,8 @@
 import { Percent, Wallet, Trophy } from "lucide-react";
-import { Card, Carousel } from "@/components/ui/shadcn-io/apple-cards-carousel";
+// import { Card, Carousel } from "@/components/ui/shadcn-io/apple-cards-carousel";
 import { motion } from "framer-motion";
 import { GridPattern } from "@/components/ui/shadcn-io/grid-pattern";
-import { getVideoUrl } from "@/config/videos.config";
+// import { getVideoUrl } from "@/config/videos.config";
 
 //import Marquee1 from "@/assets/results-screenshots/1.png";
 //import Marquee2 from "@/assets/results-screenshots/2.jpg";
@@ -30,12 +30,12 @@ import { getVideoUrl } from "@/config/videos.config";
 //import MillerImg from "@/assets/testimonials/Miller.png";
 //import SantiagoImg from "@/assets/testimonials/Santiago.png";
 //import EthsonImg from "@/assets/testimonials/Ethson.png";
-import {
-  ScrollableMarquee,
-  ScrollableMarqueeFade,
-  ScrollableMarqueeItem,
-} from "@/components/ui/shadcn-io/scrollable-marquee";
-import { ImageZoom } from "@/components/ui/shadcn-io/image-zoom";
+// import {
+//   ScrollableMarquee,
+//   ScrollableMarqueeFade,
+//   ScrollableMarqueeItem,
+// } from "@/components/ui/shadcn-io/scrollable-marquee";
+// import { ImageZoom } from "@/components/ui/shadcn-io/image-zoom";
 
 {/* const items = [
   {
@@ -253,7 +253,8 @@ export function CaseStudiesSection({
               })}
             </div>
           </div>
-          <div>
+          {/* Carousel section - commented out until items data is available */}
+          {/* <div>
             <Carousel
               isVisible={isVisible}
               items={items.map((item, index) => (
@@ -269,9 +270,10 @@ export function CaseStudiesSection({
                 />
               ))}
             />
-          </div>
+          </div> */}
         </motion.div>
-      <div className="flex w-full h-40 md:h-64 items-center justify-center bg-transparent py-8">
+      {/* Marquee section - commented out until itemsMarquee data is available */}
+      {/* <div className="flex w-full h-40 md:h-64 items-center justify-center bg-transparent py-8">
         <ScrollableMarquee className="w-full" speed={40} pauseOnHover={true}>
           <ScrollableMarqueeFade side="left" />
           <ScrollableMarqueeFade side="right" />
@@ -288,7 +290,7 @@ export function CaseStudiesSection({
             </ScrollableMarqueeItem>
           ))}
         </ScrollableMarquee>
-      </div>
+      </div> */}
     </section>
   );
 }

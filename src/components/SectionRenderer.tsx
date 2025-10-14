@@ -5,7 +5,7 @@
  * Handles both eager and lazy loading based on config.
  */
 
-import { Suspense, lazy } from 'react';
+// import { Suspense } from 'react'; // Commented out until lazy components are re-enabled
 import { LazySection } from '@/components/ui/lazy-section';
 import type { SectionConfig } from '@/components/ui/shadcn-io/navbar-01/types';
 import { useViewportMargin } from '@/hooks/useViewportMargin';
@@ -102,7 +102,8 @@ export function SectionRenderer({ sections, variant = 'personal' }: SectionRende
         }
 
         // LAZY LOADING: Wrap in Suspense
-        if (lazyLoad && isLazyComponent) {
+        // Commented out until lazy components are re-enabled
+        /* if (lazyLoad && isLazyComponent) {
           const SectionComponent = LAZY_COMPONENTS[component as keyof typeof LAZY_COMPONENTS];
 
           return (
@@ -131,7 +132,7 @@ export function SectionRenderer({ sections, variant = 'personal' }: SectionRende
               )}
             </LazySection>
           );
-        }
+        } */
 
         // Fallback: If lazyLoad flag doesn't match component type, log warning
         console.warn(`Section "${component}" lazyLoad setting (${lazyLoad}) doesn't match its import type`);
