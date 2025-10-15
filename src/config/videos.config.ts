@@ -2,10 +2,11 @@
  * Centralized Video Configuration
  *
  * This file manages all video assets stored in Cloudflare R2.
- * Videos are served from a public R2 bucket and do not require authentication.
+ * Videos are served via Cloudflare Pages Functions using native R2 bindings
+ * for optimal performance (zero network hops, same-origin serving).
  *
- * Environment Variables:
- * - VITE_R2_BUCKET_URL: Base URL for R2 bucket (set in .env.local)
+ * Video URLs are generated as relative paths: /media/[videoKey]
+ * The Cloudflare Function at functions/media/[videoKey].js handles serving.
  */
 
 export interface VideoMetadata {
@@ -69,23 +70,30 @@ export const VIDEOS: Record<string, VideoMetadata> = {
 } as const;
 
 /**
- * Get the base URL for the R2 bucket
- * Falls back to empty string if environment variable is not set
+ * Get the base URL for the R2 bucket (legacy - kept for backward compatibility)
+ *
+ * @deprecated This function is no longer needed as videos are served via
+ * Cloudflare Functions with R2 bindings. It's kept for potential fallback scenarios.
  */
 export const getR2BaseUrl = (): string => {
   return import.meta.env.VITE_R2_BUCKET_URL || '';
 };
 
 /**
- * Build a complete video URL from a video key
+ * Build a video URL from a video key
+ *
+ * Videos are now served via Cloudflare Pages Functions using R2 bindings.
+ * This provides optimal performance as videos are served from the same edge
+ * location as your website, with zero network hops to R2.
  *
  * @param videoKey - Key from VIDEOS object (e.g., 'HERO_DEMO')
- * @returns Complete URL to the video file
+ * @returns Relative URL to the video served via Cloudflare Function
  *
  * @example
  * ```ts
  * const heroVideoUrl = getVideoUrl('HERO_DEMO');
- * // Returns: "https://pub-xxxxx.r2.dev/Skillia%20Demo.mp4"
+ * // Returns: "/media/HERO_DEMO"
+ * // Served by: functions/media/[videoKey].js
  * ```
  */
 export const getVideoUrl = (videoKey: keyof typeof VIDEOS): string => {
@@ -95,16 +103,10 @@ export const getVideoUrl = (videoKey: keyof typeof VIDEOS): string => {
     return '';
   }
 
-  const baseUrl = getR2BaseUrl();
-  if (!baseUrl) {
-    console.error('R2 bucket URL not configured. Set VITE_R2_BUCKET_URL in .env.local');
-    return '';
-  }
-
-  // URL encode the filename to handle spaces and special characters
-  const encodedFilename = encodeURIComponent(video.filename);
-
-  return `${baseUrl}/${encodedFilename}`;
+  // Return relative URL - served by Cloudflare Pages Function
+  // The function at functions/media/[videoKey].js will handle the request
+  // and stream the video directly from R2 using the binding
+  return `/media/${String(videoKey)}`;
 };
 
 /**

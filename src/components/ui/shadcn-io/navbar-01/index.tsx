@@ -67,9 +67,9 @@ export const Navbar01 = React.forwardRef<HTMLElement, Navbar01Props>(
       logo = <img src={Logo} className="w-10 h-10" alt="Skillia" />,
       navigationLinks = defaultNavigationLinks,
       signInText = "Iniciar Sesión",
-      signInHref = "http://localhost:5173",
+      signInHref = "/under-improvement",
       ctaText = "Regístrate",
-      ctaHref = "http://localhost:5173/auth/signup",
+      ctaHref = "/under-improvement",
       onSignInClick,
       onCtaClick,
       ...props
@@ -247,7 +247,7 @@ export const Navbar01 = React.forwardRef<HTMLElement, Navbar01Props>(
                   {/* Sign Up button - only visible on Personal route */}
                   {isPersonalRoute && (
                     <Button
-                      onClick={() => window.location.href = ctaHref}
+                      onClick={() => navigate(ctaHref)}
                       variant="outline"
                       className="h-9 px-4 text-sm">
                       {ctaText}
@@ -290,13 +290,13 @@ export const Navbar01 = React.forwardRef<HTMLElement, Navbar01Props>(
                         {isPersonalRoute && (
                           <div className="flex flex-col gap-3 mt-6 w-full">
                             <Button
-                              onClick={() => window.location.href = ctaHref}
+                              onClick={() => navigate(ctaHref)}
                               variant="navbar-signup"
                               className="w-full">
                               Regístrate
                             </Button>
                             <Button
-                              onClick={() => window.location.href = signInHref}
+                              onClick={() => navigate(signInHref)}
                               variant="navbar-login"
                               className="w-full">
                               Inicia Sesión
@@ -342,7 +342,7 @@ export const Navbar01 = React.forwardRef<HTMLElement, Navbar01Props>(
                         <>
                           <NavigationMenuItem>
                             <Button
-                              onClick={() => window.location.href = signInHref}
+                              onClick={() => navigate(signInHref)}
                               variant="navbar-login"
                               className="whitespace-nowrap">
                               Inicia Sesión
@@ -350,7 +350,7 @@ export const Navbar01 = React.forwardRef<HTMLElement, Navbar01Props>(
                           </NavigationMenuItem>
                           <NavigationMenuItem>
                             <Button
-                              onClick={() => window.location.href = ctaHref}
+                              onClick={() => navigate(ctaHref)}
                               variant="navbar-signup"
                               className="whitespace-nowrap">
                               Regístrate

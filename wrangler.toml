@@ -1,0 +1,6 @@
+name = "skillia-website"
+compatibility_date = "2025-10-15"
+
+[[r2_buckets]]
+binding = "website-media-bucket"
+bucket_name = "website-media"
