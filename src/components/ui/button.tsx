@@ -8,7 +8,7 @@ const buttonVariants = cva("", {
   variants: {
     variant: {
       default:
-        "bg-transparent text-foreground/50 font-medium hover:text-foreground hover:bg-foreground/5 px-3 py-2 rounded-xl cursor-pointer transition-all duration-200 supports-[backdrop-filter]:backdrop-blur-sm max-lg:text-xs",
+        "flex items-center justify-center gap-2 bg-transparent text-foreground/50 font-medium hover:text-foreground hover:bg-foreground/5 px-3 py-2 rounded-xl cursor-pointer transition-all duration-200 supports-[backdrop-filter]:backdrop-blur-sm max-lg:text-xs",
       "default-selected":
         "bg-foreground/10 text-foreground font-medium hover:text-foreground px-3 py-2 rounded-xl cursor-pointer transition-all duration-200 supports-[backdrop-filter]:backdrop-blur-sm max-lg:text-xs",
       outline:
