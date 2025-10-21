@@ -207,7 +207,7 @@ export function HeroSection({
                           variant="secondary-hero-button"
                           onClick={() =>
                             (window.location.href =
-                              "http://localhost:5173?autoSignIn=google")
+                              "http://www.skill-ia.com?autoSignIn=google")
                           }>
                           <FcGoogle className="w-5 h-auto" />
                           Empieza Gratis con Google
