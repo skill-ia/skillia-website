@@ -2,6 +2,8 @@
  * Navbar Types
  */
 
+import type { LogoVariant } from '@/config/logos.config';
+
 export interface Navbar01NavLink {
   href: string;
   label: string;
@@ -10,6 +12,7 @@ export interface Navbar01NavLink {
 
 export interface Navbar01Props extends React.HTMLAttributes<HTMLElement> {
   logo?: React.ReactNode;
+  logoVariant?: LogoVariant;
   logoHref?: string;
   navigationLinks?: Navbar01NavLink[];
   signInText?: string;
@@ -18,6 +21,8 @@ export interface Navbar01Props extends React.HTMLAttributes<HTMLElement> {
   ctaHref?: string;
   onSignInClick?: () => void;
   onCtaClick?: () => void;
+  selectorVisible?: boolean;
+  linksVisible?: boolean;
 }
 
 /**

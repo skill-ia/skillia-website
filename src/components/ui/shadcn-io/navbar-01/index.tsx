@@ -15,9 +15,9 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
-import Logo from "/SKILLIA_RECURSOS/LOGOTIP_ISOTIP/LOGOTIP/SVG/PER FONS BLANC.svg";
 import { motion } from "framer-motion";
 import type { Navbar01NavLink, Navbar01Props } from "./types";
+import { getLogoPath, DEFAULT_LOGO_VARIANT } from "@/config/logos.config";
 
 // Hamburger icon component
 const HamburgerIcon = ({
@@ -64,7 +64,8 @@ export const Navbar01 = React.forwardRef<HTMLElement, Navbar01Props>(
   (
     {
       className,
-      logo = <img src={Logo} className="w-10 h-10" alt="Skillia" />,
+      logo,
+      logoVariant = DEFAULT_LOGO_VARIANT,
       navigationLinks = defaultNavigationLinks,
       signInText = "Iniciar Sesión",
       signInHref = "/under-improvement",
@@ -72,10 +73,14 @@ export const Navbar01 = React.forwardRef<HTMLElement, Navbar01Props>(
       ctaHref = "/under-improvement",
       onSignInClick,
       onCtaClick,
+      selectorVisible = true,
+      linksVisible = true,
       ...props
     },
     ref
   ) => {
+    // Determine which logo source to use: custom logo prop takes priority, otherwise use logoVariant
+    const logoSrc = logo ? null : getLogoPath(logoVariant);
     const [isMobile, setIsMobile] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const containerRef = useRef<HTMLElement>(null);
@@ -98,10 +103,7 @@ export const Navbar01 = React.forwardRef<HTMLElement, Navbar01Props>(
 
       // Special handling for booking/contact
       if (href === "#contacto") {
-        window.open(
-          "mailto:info@skill-ia.com",
-          "_blank"
-        );
+        navigate("/contact");
         return;
       }
 
@@ -168,16 +170,16 @@ export const Navbar01 = React.forwardRef<HTMLElement, Navbar01Props>(
     useEffect(() => {
       if (isMobileMenuOpen && isMobile) {
         const scrollY = window.scrollY;
-        document.body.style.position = 'fixed';
+        document.body.style.position = "fixed";
         document.body.style.top = `-${scrollY}px`;
-        document.body.style.width = '100%';
-        document.body.style.overflow = 'hidden';
+        document.body.style.width = "100%";
+        document.body.style.overflow = "hidden";
 
         return () => {
-          document.body.style.position = '';
-          document.body.style.top = '';
-          document.body.style.width = '';
-          document.body.style.overflow = '';
+          document.body.style.position = "";
+          document.body.style.top = "";
+          document.body.style.width = "";
+          document.body.style.overflow = "";
           window.scrollTo(0, scrollY);
         };
       }
@@ -218,18 +220,20 @@ export const Navbar01 = React.forwardRef<HTMLElement, Navbar01Props>(
             ease: [0.25, 0.4, 0.25, 1],
           }}>
           {/* Persona/Entidad selector */}
-          <div className="flex items-center justify-center gap-2 mt-3 max-lg:mb-2">
-            <Button
-              variant={isPersonalRoute ? "default-selected" : "default"}
-              onClick={() => navigate("/personal/")}>
-              Persona
-            </Button>
-            <Button
-              variant={isEntitiesRoute ? "default-selected" : "default"}
-              onClick={() => navigate("/entities/")}>
-              Entidad
-            </Button>
-          </div>
+          {selectorVisible ? (
+            <div className="flex items-center justify-center gap-2 mt-3 max-lg:mb-2">
+              <Button
+                variant={isPersonalRoute ? "default-selected" : "default"}
+                onClick={() => navigate("/personal/")}>
+                Persona
+              </Button>
+              <Button
+                variant={isEntitiesRoute ? "default-selected" : "default"}
+                onClick={() => navigate("/entities/")}>
+                Entidad
+              </Button>
+            </div>
+          ): null}
           <div className="w-full flex flex-col lg:flex-row items-center lg:items-center justify-center lg:justify-between lg:px-[clamp(1rem,3vw,1.5rem)] gap-2 lg:gap-0 lg:pt-0 relative">
             {/* Mobile: Logo left, Sign Up + Hamburger right (Holded style) */}
             {isMobile ? (
@@ -239,7 +243,7 @@ export const Navbar01 = React.forwardRef<HTMLElement, Navbar01Props>(
                   className="flex items-center cursor-pointer"
                   onClick={() => (window.location.href = "/")}
                   style={{ transition: "all 0.3s ease" }}>
-                  <img src={Logo} className="w-auto h-10" alt="Skillia" />
+                  {logo || <img src={logoSrc!} className="w-auto h-10" alt="Skillia" />}
                 </div>
 
                 {/* Right side: Sign Up button + Hamburger menu */}
@@ -254,58 +258,60 @@ export const Navbar01 = React.forwardRef<HTMLElement, Navbar01Props>(
                     </Button>
                   )}
 
-                  {/* Hamburger menu trigger */}
-                  <Popover
-                    open={isMobileMenuOpen}
-                    onOpenChange={setIsMobileMenuOpen}>
-                    <PopoverTrigger asChild>
-                      <Button
-                        className="group h-10 w-10 p-0"
-                        variant="subtle">
-                        <HamburgerIcon className="w-6 h-6" />
-                      </Button>
-                    </PopoverTrigger>
-                    <PopoverContent
-                      align="start"
-                      side="bottom"
-                      sideOffset={8}
-                      className="w-screen h-[100dvh] p-4 !bg-[var(--background)] border-none shadow-none text-primary flex flex-col items-start justify-start">
-                      <div className="w-full flex flex-col">
-                        <NavigationMenu className="w-auto">
-                          <NavigationMenuList className="flex-col items-start gap-2">
-                            {navigationLinks.map((link, index) => (
-                              <NavigationMenuItem key={index} className="w-auto">
-                                <Button
-                                  onClick={(e) => handleNavClick(e, link.href)}
-                                  variant="subtle"
-                                  className="justify-start text-left w-auto h-auto py-3 px-4">
-                                  {link.label}
-                                </Button>
-                              </NavigationMenuItem>
-                            ))}
-                          </NavigationMenuList>
-                        </NavigationMenu>
+                  {/* Hamburger menu trigger - only visible when links are enabled */}
+                  {linksVisible && (
+                    <Popover
+                      open={isMobileMenuOpen}
+                      onOpenChange={setIsMobileMenuOpen}>
+                      <PopoverTrigger asChild>
+                        <Button className="group h-10 w-10 p-0" variant="subtle">
+                          <HamburgerIcon className="w-6 h-6" />
+                        </Button>
+                      </PopoverTrigger>
+                      <PopoverContent
+                        align="start"
+                        side="bottom"
+                        sideOffset={8}
+                        className="w-screen h-[100dvh] p-4 !bg-[var(--background)] border-none shadow-none text-primary flex flex-col items-start justify-start">
+                        <div className="w-full flex flex-col">
+                          <NavigationMenu className="w-auto">
+                            <NavigationMenuList className="flex-col items-start gap-2">
+                              {navigationLinks.map((link, index) => (
+                                <NavigationMenuItem
+                                  key={index}
+                                  className="w-auto">
+                                  <Button
+                                    onClick={(e) => handleNavClick(e, link.href)}
+                                    variant="subtle"
+                                    className="justify-start text-left w-auto h-auto py-3 px-4">
+                                    {link.label}
+                                  </Button>
+                                </NavigationMenuItem>
+                              ))}
+                            </NavigationMenuList>
+                          </NavigationMenu>
 
-                        {/* CTA Buttons - only visible on Personal route */}
-                        {isPersonalRoute && (
-                          <div className="flex flex-col gap-3 mt-6 w-full">
-                            <Button
-                              onClick={() => navigate(ctaHref)}
-                              variant="navbar-signup"
-                              className="w-full">
-                              Regístrate
-                            </Button>
-                            <Button
-                              onClick={() => navigate(signInHref)}
-                              variant="navbar-login"
-                              className="w-full">
-                              Inicia Sesión
-                            </Button>
-                          </div>
-                        )}
-                      </div>
-                    </PopoverContent>
-                  </Popover>
+                          {/* CTA Buttons - only visible on Personal route */}
+                          {isPersonalRoute && (
+                            <div className="flex flex-col gap-3 mt-6 w-full">
+                              <Button
+                                onClick={() => navigate(ctaHref)}
+                                variant="navbar-signup"
+                                className="w-full">
+                                Regístrate
+                              </Button>
+                              <Button
+                                onClick={() => navigate(signInHref)}
+                                variant="navbar-login"
+                                className="w-full">
+                                Inicia Sesión
+                              </Button>
+                            </div>
+                          )}
+                        </div>
+                      </PopoverContent>
+                    </Popover>
+                  )}
                 </div>
               </div>
             ) : (
@@ -313,18 +319,20 @@ export const Navbar01 = React.forwardRef<HTMLElement, Navbar01Props>(
               <>
                 {/* Left side - Logo */}
                 <div className="flex items-center gap-2">
-                  <div className="flex items-center justify-center py-[clamp(0.5rem,1vw,0.75rem)] px-[clamp(1rem,1.5vw,1rem)] bg-background/80 supports-[backdrop-filter]:bg-transparent supports-[backdrop-filter]:backdrop-blur-sm lg:rounded-full overflow-hidden">
+                  <div className="flex items-center justify-center py-[clamp(0.75rem,1.5vw,1.25rem)] px-[clamp(1rem,1.5vw,1rem)] bg-background/80 supports-[backdrop-filter]:bg-transparent supports-[backdrop-filter]:backdrop-blur-sm lg:rounded-full overflow-hidden">
                     <div
                       className="flex items-center cursor-pointer"
                       onClick={() => (window.location.href = "/")}
                       style={{ transition: "all 0.3s ease" }}>
-                      <img src={Logo} className="w-auto h-12" alt="Skillia" />
+                      {logo || <img src={logoSrc!} className="w-auto h-14" alt="Skillia" />}
                     </div>
                   </div>
                 </div>
 
                 {/* Center - Navigation menu with CTA Buttons */}
-                <div className="py-[clamp(0.25rem,1vw,0.5rem)] px-[clamp(0.75rem,2vw,1rem)] items-end bg-background/80 supports-[backdrop-filter]:bg-transparent supports-[backdrop-filter]:backdrop-blur-sm lg:rounded-full overflow-hidden z-150">
+                {linksVisible ? (
+
+                <div className="py-[clamp(0.5rem,1.5vw,0.875rem)] px-[clamp(0.75rem,2vw,1rem)] items-end bg-background/80 supports-[backdrop-filter]:bg-transparent supports-[backdrop-filter]:backdrop-blur-sm lg:rounded-full overflow-hidden z-150">
                   <NavigationMenu className="flex">
                     <NavigationMenuList className="gap-[clamp(0.25rem,0.5vw,0.5rem)]">
                       {navigationLinks.map((link, index) => (
@@ -361,6 +369,8 @@ export const Navbar01 = React.forwardRef<HTMLElement, Navbar01Props>(
                     </NavigationMenuList>
                   </NavigationMenu>
                 </div>
+                  ) : null}
+
               </>
             )}
           </div>
@@ -372,4 +382,4 @@ export const Navbar01 = React.forwardRef<HTMLElement, Navbar01Props>(
 
 Navbar01.displayName = "Navbar01";
 
-export { Logo, HamburgerIcon };
+export { HamburgerIcon };
