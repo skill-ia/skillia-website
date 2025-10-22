@@ -75,6 +75,7 @@ export const Navbar01 = React.forwardRef<HTMLElement, Navbar01Props>(
       onCtaClick,
       selectorVisible = true,
       linksVisible = true,
+      authButtonsVisible = true,
       ...props
     },
     ref
@@ -248,8 +249,8 @@ export const Navbar01 = React.forwardRef<HTMLElement, Navbar01Props>(
 
                 {/* Right side: Sign Up button + Hamburger menu */}
                 <div className="flex items-center gap-3">
-                  {/* Sign Up button - only visible on Personal route */}
-                  {isPersonalRoute && (
+                  {/* Sign Up button - controlled by authButtonsVisible prop */}
+                  {authButtonsVisible && (
                     <Button
                       onClick={() => navigate(ctaHref)}
                       variant="outline"
@@ -291,8 +292,8 @@ export const Navbar01 = React.forwardRef<HTMLElement, Navbar01Props>(
                             </NavigationMenuList>
                           </NavigationMenu>
 
-                          {/* CTA Buttons - only visible on Personal route */}
-                          {isPersonalRoute && (
+                          {/* CTA Buttons - controlled by authButtonsVisible prop */}
+                          {authButtonsVisible && (
                             <div className="flex flex-col gap-3 mt-6 w-full">
                               <Button
                                 onClick={() => navigate(ctaHref)}
@@ -329,47 +330,47 @@ export const Navbar01 = React.forwardRef<HTMLElement, Navbar01Props>(
                   </div>
                 </div>
 
-                {/* Center - Navigation menu with CTA Buttons */}
-                {linksVisible ? (
-
-                <div className="py-[clamp(0.5rem,1.5vw,0.875rem)] px-[clamp(0.75rem,2vw,1rem)] items-end bg-background/80 supports-[backdrop-filter]:bg-transparent supports-[backdrop-filter]:backdrop-blur-sm lg:rounded-full overflow-hidden z-150">
-                  <NavigationMenu className="flex">
-                    <NavigationMenuList className="gap-[clamp(0.25rem,0.5vw,0.5rem)]">
-                      {navigationLinks.map((link, index) => (
-                        <NavigationMenuItem key={index}>
-                          <Button
-                            onClick={(e) => handleNavClick(e, link.href)}
-                            variant="subtle"
-                            className="whitespace-nowrap">
-                            {link.label}
-                          </Button>
-                        </NavigationMenuItem>
-                      ))}
-                      {/* CTA Buttons inline (only on Personal route) */}
-                      {isPersonalRoute && (
-                        <>
-                          <NavigationMenuItem>
+                {/* Center - Navigation menu with Auth Buttons (both in same container) */}
+                {(linksVisible || authButtonsVisible) && (
+                  <div className="py-[clamp(0.5rem,1.5vw,0.875rem)] px-[clamp(0.75rem,2vw,1rem)] items-end bg-background/80 supports-[backdrop-filter]:bg-transparent supports-[backdrop-filter]:backdrop-blur-sm lg:rounded-full overflow-hidden z-150">
+                    <NavigationMenu className="flex">
+                      <NavigationMenuList className="gap-[clamp(0.25rem,0.5vw,0.5rem)]">
+                        {/* Navigation links - controlled by linksVisible */}
+                        {linksVisible && navigationLinks.map((link, index) => (
+                          <NavigationMenuItem key={index}>
                             <Button
-                              onClick={() => navigate(signInHref)}
-                              variant="navbar-login"
+                              onClick={(e) => handleNavClick(e, link.href)}
+                              variant="subtle"
                               className="whitespace-nowrap">
-                              Inicia Sesión
+                              {link.label}
                             </Button>
                           </NavigationMenuItem>
-                          <NavigationMenuItem>
-                            <Button
-                              onClick={() => navigate(ctaHref)}
-                              variant="navbar-signup"
-                              className="whitespace-nowrap">
-                              Regístrate
-                            </Button>
-                          </NavigationMenuItem>
-                        </>
-                      )}
-                    </NavigationMenuList>
-                  </NavigationMenu>
-                </div>
-                  ) : null}
+                        ))}
+                        {/* Auth Buttons - controlled by authButtonsVisible */}
+                        {authButtonsVisible && (
+                          <>
+                            <NavigationMenuItem>
+                              <Button
+                                onClick={() => navigate(signInHref)}
+                                variant="navbar-login"
+                                className="whitespace-nowrap">
+                                Inicia Sesión
+                              </Button>
+                            </NavigationMenuItem>
+                            <NavigationMenuItem>
+                              <Button
+                                onClick={() => navigate(ctaHref)}
+                                variant="navbar-signup"
+                                className="whitespace-nowrap">
+                                Regístrate
+                              </Button>
+                            </NavigationMenuItem>
+                          </>
+                        )}
+                      </NavigationMenuList>
+                    </NavigationMenu>
+                  </div>
+                )}
 
               </>
             )}

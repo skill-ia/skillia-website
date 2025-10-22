@@ -23,6 +23,7 @@ export interface Navbar01Props extends React.HTMLAttributes<HTMLElement> {
   onCtaClick?: () => void;
   selectorVisible?: boolean;
   linksVisible?: boolean;
+  authButtonsVisible?: boolean;
 }
 
 /**

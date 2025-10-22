@@ -26,7 +26,7 @@ function App() {
 
   // Hide navbar elements on specific routes
   const hideNavigation = location.pathname === '/contact' || location.pathname === '/under-improvement';
-
+  const hideAuthButtons = location.pathname === '/under-improvement';
   // Choose logo variant based on route
   const getLogoVariant = (): LogoVariant => {
     if (location.pathname === '/contact') return 'white';
@@ -40,13 +40,14 @@ function App() {
         navigationLinks={navigationLinks}
         selectorVisible={!hideNavigation}
         linksVisible={!hideNavigation}
+        authButtonsVisible={!hideAuthButtons}
         logoVariant={getLogoVariant() as LogoVariant}
       />
       <Analytics />
       <SpeedInsights />
       <Routes>
         {/* Root redirect to personal */}
-        <Route path="/" element={<Navigate to="/personal/" replace />} />
+        <Route path="/" element={<Navigate to="/entities/" replace />} />
 
         {/* Under improvement page */}
         <Route path="/under-improvement" element={<UnderImprovementSection />} />
@@ -61,7 +62,7 @@ function App() {
         <Route path="/entities/*" element={<EntitiesLayout />} />
 
         {/* Catch-all redirect */}
-        <Route path="*" element={<Navigate to="/personal/" replace />} />
+        <Route path="*" element={<Navigate to="/entities/" replace />} />
       </Routes>
     </>
   );
