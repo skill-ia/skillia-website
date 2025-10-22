@@ -5,6 +5,7 @@ import { FcGoogle } from "react-icons/fc";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { trackVideoPlay } from "@/utils/analytics";
 import { getVideoUrl, getVideoMetadata } from "@/config/videos.config";
 
@@ -62,6 +63,7 @@ export function HeroSection({
   variant = "personal",
 }: HeroSectionProps) {
   const isMobile = useIsMobile();
+  const navigate = useNavigate();
   const overlayVideoRef = useRef<HTMLVideoElement>(null);
 
   // State management
@@ -198,17 +200,25 @@ export function HeroSection({
                       <>
                         <Button
                           variant="main-hero-button"
+                          onClick={() => navigate("/under-improvement")}>
+                          {/* Temporarily redirecting to under-improvement instead of skill-ia.com */}
+                          {/* Original implementation (commented out):
                           onClick={() =>
                             (window.location.href = "https://www.skill-ia.com")
-                          }>
+                          }
+                          */}
                           Empieza Gratis
                         </Button>
                         <Button
                           variant="secondary-hero-button"
+                          onClick={() => navigate("/under-improvement")}>
+                          {/* Temporarily redirecting to under-improvement instead of skill-ia.com */}
+                          {/* Original implementation (commented out):
                           onClick={() =>
                             (window.location.href =
                               "http://www.skill-ia.com?autoSignIn=google")
-                          }>
+                          }
+                          */}
                           <FcGoogle className="w-5 h-auto" />
                           Empieza Gratis con Google
                         </Button>
@@ -222,9 +232,7 @@ export function HeroSection({
                         </Button>
                         <Button
                           variant="secondary-hero-button"
-                          onClick={() =>
-                            (window.location.href = "mailto:info@skill-ia.com")
-                          }>
+                          onClick={() => navigate("/contact")}>
                           Contactar con Ventas
                         </Button>
                       </>
