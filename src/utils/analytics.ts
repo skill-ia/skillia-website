@@ -1,4 +1,3 @@
-import { track as vercelTrack } from '@vercel/analytics';
 import type { 
   AnalyticsEvent, 
   AnalyticsProvider, 
@@ -192,42 +191,6 @@ class AnalyticsManager {
   }
 }
 
-// Vercel Analytics Provider
-const vercelProvider: AnalyticsProvider = {
-  name: 'vercel',
-  enabled: true,
-  track: async (event: AnalyticsEvent) => {
-    // Map our events to Vercel Analytics format
-    const eventData: Record<string, any> = {
-      timestamp: event.timestamp,
-      session_id: event.session_id,
-      referrer: event.referrer,
-      page_url: event.page_url
-    };
-
-    switch (event.event) {
-      case 'video_play':
-        eventData.video_id = event.video_id;
-        eventData.video_title = event.video_title;
-        eventData.video_url = event.video_url;
-        break;
-      case 'video_engagement':
-        eventData.video_id = event.video_id;
-        eventData.engagement_type = event.engagement_type;
-        eventData.current_time = event.current_time;
-        eventData.engagement_percentage = event.engagement_percentage;
-        break;
-      case 'conversion':
-        eventData.conversion_type = event.conversion_type;
-        eventData.video_source = event.video_source;
-        eventData.conversion_value = event.conversion_value;
-        break;
-    }
-
-    vercelTrack(event.event, eventData);
-  }
-};
-
 // Console Logger Provider (for development)
 const consoleProvider: AnalyticsProvider = {
   name: 'console',
@@ -242,7 +205,7 @@ const consoleProvider: AnalyticsProvider = {
 
 // Default configuration
 const defaultConfig: AnalyticsConfig = {
-  providers: [vercelProvider, consoleProvider],
+  providers: [consoleProvider],
   enableConsoleLogging: process.env.NODE_ENV === 'development',
   enableBatching: false, // Disabled for real-time tracking
   batchSize: 5,

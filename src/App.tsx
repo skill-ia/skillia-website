@@ -13,8 +13,6 @@ import { UnderImprovementSection } from '@/components/sections/UnderImprovementS
 import ContactUs from '@/components/ContactUs';
 import { personalNavLinks } from '@/config/personal-sections.config';
 import { entitiesNavLinks } from '@/config/entities-sections.config';
-import { Analytics } from '@vercel/analytics/react';
-import { SpeedInsights } from '@vercel/speed-insights/react';
 import { type LogoVariant } from './config/logos.config';
 
 function App() {
@@ -43,8 +41,6 @@ function App() {
         authButtonsVisible={!hideAuthButtons}
         logoVariant={getLogoVariant() as LogoVariant}
       />
-      <Analytics />
-      <SpeedInsights />
       <Routes>
         {/* Root redirect to personal */}
         <Route path="/" element={<Navigate to="/entities/" replace />} />

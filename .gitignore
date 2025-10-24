@@ -24,7 +24,6 @@ dist-ssr
 *.sw?
 
 .claude
-.vercel
 
 *testimonials*
 VSL2.mp4
